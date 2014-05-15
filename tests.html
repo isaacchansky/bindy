@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Declarative Data Binding with bindy.js</title>
+        <style>
+          *{
+            font-family: 'helvetica neue', sans-serif;
+            font-weight: 200;
+          }
+        </style>
+    </head>
+    <body>
+      <h1>Bindy.js!</h1>
+
+        <h2>Author</h2>
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" placeholder="author name" data-bind-to="author.name" />
+
+        <label for="textarea">Bio:</label>
+        <textarea cols="40" rows="8" name="textarea" id="textarea" placeholder="author bio" data-bind-to="author.bio"></textarea>
+
+        <h2>Book</h2>
+        <label for="name">Title:</label>
+        <input type="text" name="name" id="name" placeholder="book title" data-bind-to="book.title" />
+
+        <label for="textarea">Description:</label>
+        <textarea cols="40" rows="8" name="textarea" id="textarea" placeholder="book description" data-bind-to="book.description"></textarea>
+
+      <div class="results">
+        <h2>Author:</h2>
+        <h3 data-bind-from="author.name"></h3>
+        <p data-bind-from="author.bio"></p>
+        <h2>Book:</h2>
+        <h3 data-bind-from="book.title"></h3>
+        <p data-bind-from="book.description"></p>
+      </div>
+
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <script src="jquery.bindy.js"></script>
+      <script>
+        // Basic bindy Tests
+        $(document).bindy();
+      </script>
+      </body>
+  </html>
