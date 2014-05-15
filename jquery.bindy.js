@@ -19,20 +19,30 @@
     options = options || {};
     $.extend( defaultSettings, options );
 
-    var model = options.model || {};
+    var rootModel = options.model || {};
+
+    function initializeRootModel() {
+      var domBindings = $('[data-bind-to]');
+      domBindings.each(function(i, el){
+        var binder = $(el).data().bindTo.split('.');
+        var object = binder[0];
+        var attr = binder[1];
+        rootModel[object] = rootModel[object] || {};
+        rootModel[object][attr] = rootModel[object][attr];
+      });
+    }
 
     function updateModel(e){
-      $scope.trigger('input:changed', [e, model]);
-
       var $target = $(e.currentTarget);
       var binding = $target.data().bindTo.split('.');
       var object = binding[0];
       var attr = binding[1];
-      if(model[object] === undefined){
-        model[object] = {};
+      if(rootModel[object] === undefined){
+        rootModel[object] = {};
       }
-      model[object][attr] = $target.val();
+      rootModel[object][attr] = $target.val();
 
+      $scope.trigger('input:changed', [e, rootModel]);
       $scope.trigger('model:updated', e);
     }
 
@@ -47,7 +57,7 @@
         var binder = $(el).data().bindFrom.split('.');
         var object = binder[0];
         var attr = binder[1];
-        var value = model[object][attr];
+        var value = rootModel[object][attr];
         $(el).html(value);
       });
     }
@@ -59,13 +69,31 @@
       //   ...
       // }
       if( typeof(options.beforeUpdate) === 'function' ){
-        options.beforeUpdate.call(null, model);
+        var transformation = options.beforeUpdate.call(null, model);
+        if( transformation !== undefined){
+          rootModel = transformation;
+        }
       }
     }
 
+    function runAfterUpdate (eventTriggered, domEvent, model) {
+      // assume passed in function is of the following format
+      //
+      // function(model){
+      //   ...
+      //  return model;
+      // }
+      if( typeof(options.beforeUpdate) === 'function' ){
+        var transformation = options.afterUpdate.call(null, model);
+        if( transformation !== undefined){
+          rootModel = transformation;
+        }
+      }
+    }
     var $dataBindings = $('[data-bind-to]');
 
-    $dataBindings.on('keydown keyup', updateModel);
+    initializeRootModel();
+    $dataBindings.on('keyup keydown', updateModel);
     $scope.on('model:updated', updateDOMbindings);
     $scope.on('input:changed', runBeforeUpdate);
 
