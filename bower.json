@@ -1,0 +1,21 @@
+{
+  "name": "bindy",
+  "version": "0.1.0",
+  "authors": [
+    "Isaac Chansky <ichansky@gmail.com>"
+  ],
+  "description": "Declarative Data binding with jQuery",
+  "main": "jquery.bindy.js",
+  "keywords": [
+    "data",
+    "binding"
+  ],
+  "license": "WTFPL",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
