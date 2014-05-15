@@ -28,17 +28,16 @@
         <p data-bind-from="budget.car"></p>
         <p data-bind-from="budget.gym"></p>
         <p data-bind-from="budget.transportation"></p>
+        <p>total: <span data-bind-from="budget.total"><span></p>
       </div>
 
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
       <script src="jquery.bindy.js"></script>
       <script>
-        var app = {
-          budget: { },
-        };
+        var app = { };
         // Basic bindy Tests
         $(document).bindy({
-          model: app.budget,
+          model: app
         });
       </script>
       </body>
