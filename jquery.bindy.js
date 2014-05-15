@@ -14,25 +14,21 @@
   "use strict";
 
   $.fn.bindy = function( options ) {
-    console.log('yay bindy!');
-    var settings = {
-    };
+    var defaultSettings = { };
     options = options || {};
-    $.extend( settings, options );
+    $.extend( defaultSettings, options );
 
-    var scope = options.scope || {};
+    var model = options.model || {};
 
     function updateModel(e){
       var $target = $(e.currentTarget);
       var binding = $target.data().bindTo.split('.');
       var object = binding[0];
       var attr = binding[1];
-      if(scope[object] === undefined){
-        scope[object] = {};
+      if(model[object] === undefined){
+        model[object] = {};
       }
-      scope[object][attr] = $target.val();
-      console.log('scope:');
-      console.log(scope);
+      model[object][attr] = $target.val();
     }
 
     function updateDOMbindings(e){
@@ -46,15 +42,15 @@
         var binder = $(el).data().bindFrom.split('.');
         var object = binder[0];
         var attr = binder[1];
-        var value = scope[object][attr];
+        var value = model[object][attr];
         $(el).html(value);
       });
     }
 
     var $dataBindings = $('[data-bind-to]');
 
-    $dataBindings.on('change', updateModel);
-    $dataBindings.on('change', updateDOMbindings);
+    $dataBindings.on('keydown change', updateModel);
+    $dataBindings.on('keydown change', updateDOMbindings);
 
   };
 
