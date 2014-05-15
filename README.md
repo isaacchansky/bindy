@@ -40,3 +40,4 @@ bind data!
 ##What bindy can do
   + You can bind data from inputs/textareas **to** js objects
   + You can bind data to text nodes **from** js objects
+  + Execute functions in the context before/after binding events

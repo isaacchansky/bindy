@@ -14,6 +14,7 @@
   "use strict";
 
   $.fn.bindy = function( options ) {
+    var $scope = this; // the dom-level scope (element bindy is attached to)
     var defaultSettings = { };
     options = options || {};
     $.extend( defaultSettings, options );
@@ -21,6 +22,8 @@
     var model = options.model || {};
 
     function updateModel(e){
+      $scope.trigger('input:changed', [e, model]);
+
       var $target = $(e.currentTarget);
       var binding = $target.data().bindTo.split('.');
       var object = binding[0];
@@ -29,10 +32,12 @@
         model[object] = {};
       }
       model[object][attr] = $target.val();
+
+      $scope.trigger('model:updated', e);
     }
 
-    function updateDOMbindings(e){
-      var $target = $(e.currentTarget);
+    function updateDOMbindings(eventTriggered, domEvent){
+      var $target = $(domEvent.currentTarget);
       var binding = $target.data().bindTo.split('.');
       var object = binding[0];
       var attr = binding[1];
@@ -47,10 +52,22 @@
       });
     }
 
+    function runBeforeUpdate (eventTriggered, domEvent, model) {
+      // assume passed in function is of the following format
+      //
+      // function(model){
+      //   ...
+      // }
+      if( typeof(options.beforeUpdate) === 'function' ){
+        options.beforeUpdate.call(null, model);
+      }
+    }
+
     var $dataBindings = $('[data-bind-to]');
 
-    $dataBindings.on('keydown change', updateModel);
-    $dataBindings.on('keydown change', updateDOMbindings);
+    $dataBindings.on('keydown keyup', updateModel);
+    $scope.on('model:updated', updateDOMbindings);
+    $scope.on('input:changed', runBeforeUpdate);
 
   };
 
