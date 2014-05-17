@@ -51,7 +51,7 @@
       var binding = $target.data().bindTo.split('.');
       var object = binding[0];
       var attr = binding[1];
-      var domBindings = $('[data-bind-from]');
+      var domBindings = $(this).find('[data-bind-from]');
 
       domBindings.each(function(i, el){
         var binder = $(el).data().bindFrom.split('.');
@@ -90,8 +90,7 @@
         }
       }
     }
-    var $dataBindings = $('[data-bind-to]');
-
+    var $dataBindings = $(this).find('[data-bind-to]');
     initializeRootModel();
     $dataBindings.on('keyup keydown', updateModel);
     $scope.on('model:updated', updateDOMbindings);
