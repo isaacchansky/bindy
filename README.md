@@ -1,11 +1,11 @@
 #Bindy.js!
-A super simple, single feature declarative data-binding jquery plugin
+A super simple, declarative data-binding jquery plugin
 
 
 ##What bindy can do
   + You can bind data from inputs/textareas **to** js objects
   + You can bind data to text nodes **from** js objects
-  + Execute functions in the context before/after data binds to the DOM
+  + Execute data transformation functions in the context before or after data binds to the DOM
   + Filter output (binding *from* js objects) through functions you register
 
 
@@ -67,6 +67,15 @@ initialize with before/after binding events
   });
 </script>
 ```
+Functions for beforeUpdate and afterUpdate are simple data-transformation functions. The functions take a single parameter (your model data), and what is returned becomes the new model data. This means you must return the full object.
+```js
+function(dataModel){
+
+  ...do stuff...
+
+  return dataModel;
+}
+```
 
 
 
@@ -81,4 +90,13 @@ initialize with filters
     }
   });
 </script>
+```
+Filter functions are even simpler data-transformation functions. They take a single parameter (your data attr), and what is returned goes directly into the binding.
+```js
+function(attribute){
+  var formattedAttrubute = ... ;
+  ...do stuff...
+
+  return formattedAttribute;
+}
 ```
