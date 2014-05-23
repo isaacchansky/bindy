@@ -43,16 +43,18 @@
       <div id="budget1" class="card">
 
         <h2>My Budget</h2>
+        <input type="checkbox" data-bind-to="budget.good" />
         <input type="text" placeholder="rent" data-bind-to="budget.rent" />
         <input type="text" placeholder="food" data-bind-to="budget.food" />
         <input type="text" placeholder="car" data-bind-to="budget.car" />
         <input type="text" placeholder="gym" data-bind-to="budget.gym" />
         <input type="text" placeholder="transportation" data-bind-to="budget.transportation" />
 
+        <p>DO checkboxes work? <span data-bind-from="budget.good"></span></p>
         <div class="results">
           <h2>My Budget:</h2>
           <p>My rent is: <span data-bind-from="budget.rent"></span>, my food costs <span data-bind-from="budget.food"></span>, my car costs <span data-bind-from="budget.car"></span>, my membership to the gym costs me <span data-bind-from="budget.gym"></span>, and it costs me <span data-bind-from="budget.transportation"></span> for transportation.</p>
-          <p>so my total expenses are: <span data-bind-from="budget.total"><span></p>
+          <p>so my total expenses are: <span data-bind-from="budget.total | toCurrency"><span></p>
         </div>
         <pre class="code"></div>
       </div>
@@ -74,6 +76,11 @@
             rootModel.budget.total += parseInt(b.transportation, 10) || 0;
             // must return the root object passed in to apply a transformation on your model
             return rootModel;
+          },
+          filters: {
+            toCurrency: function(string) {
+              return '$'+(parseInt(string, 10) || 0).toFixed(2);
+            }
           }
         });
 

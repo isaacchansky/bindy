@@ -54,10 +54,17 @@
       var domBindings = $(this).find('[data-bind-from]');
 
       domBindings.each(function(i, el){
-        var binder = $(el).data().bindFrom.split('.');
-        var object = binder[0];
-        var attr = binder[1];
+        var expression = $(el).data().bindFrom;
+
+        var tokens = expression.split('|');
+        var filter = tokens[1];
+        var binder = tokens[0].split('.');
+        var object = binder[0].trim();
+        var attr = binder[1].trim();
         var value = rootModel[object][attr];
+        if(filter){
+          value = options.filters[filter.trim()].call(null, value);
+        }
         $(el).html(value);
       });
     }
