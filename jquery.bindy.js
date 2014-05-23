@@ -96,6 +96,8 @@
     $scope.on('model:updated', updateDOMbindings);
     $scope.on('input:changed', runBeforeUpdate);
 
+    return rootModel;
+
   };
 
 })(jQuery, window, document );

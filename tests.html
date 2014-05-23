@@ -62,7 +62,7 @@
       <script src="jquery.bindy.js"></script>
       <script>
         // Basic bindy Tests
-        $('#budget1').bindy({
+        window.bindy = $('#budget1').bindy({
           beforeUpdate: function(rootModel){
             var b = rootModel.budget;
             // total up your rent
