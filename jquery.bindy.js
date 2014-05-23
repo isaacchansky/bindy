@@ -32,6 +32,17 @@
       });
     }
 
+    function getValueFromDOM ($el) {
+      var tag = $el.prop('tagName');
+      var type = $el.prop('type');
+      if(tag === "INPUT"){
+        if(type === "checkbox"){
+          return $el.prop('checked');
+        }
+        return $el.val();
+      }
+    }
+
     function updateModel(e){
       var $target = $(e.currentTarget);
       var binding = $target.data().bindTo.split('.');
@@ -40,11 +51,12 @@
       if(rootModel[object] === undefined){
         rootModel[object] = {};
       }
-      rootModel[object][attr] = $target.val();
+      rootModel[object][attr] = getValueFromDOM($target);
 
       $scope.trigger('input:changed', [e, rootModel]);
       $scope.trigger('model:updated', e);
     }
+
 
     function updateDOMbindings(eventTriggered, domEvent){
       var $target = $(domEvent.currentTarget);
@@ -99,7 +111,7 @@
     }
     var $dataBindings = $(this).find('[data-bind-to]');
     initializeRootModel();
-    $dataBindings.on('keyup keydown', updateModel);
+    $dataBindings.on('keyup change keydown', updateModel);
     $scope.on('model:updated', updateDOMbindings);
     $scope.on('input:changed', runBeforeUpdate);
 
