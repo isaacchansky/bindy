@@ -4,56 +4,59 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
         <title>Declarative Data Binding with bindy.js</title>
         <style>
-          *{
+
+          h1,h2,h3,h4,h5,p,input{
             font-family: 'helvetica neue', sans-serif;
+          }
+          h1,h2,h3{
             font-weight: 200;
+          }
+          body{
+            background: #ffffff;
+          }
+          .card{
+            max-width: 40rem;
+            min-width: 10rem;
+            margin: 0 auto;
+            padding: 1rem;
+            background: #f7f7f7;
+            border-radius: 2px;
+            border: 1px solid #eeeeee;
+            border-bottom-width: 2px;
+          }
+          input{
+            padding: 5px;
+            font-size: 1rem;
+            border-radius: 2px;
+            border: 2px solid #eeeeee;
+            background: #fff;
+          }
+          input:focus{
+            outline: none;
+            border: 2px solid #ccc;
           }
         </style>
     </head>
     <body>
-      <div id="budget1">
         <h1>Bindy.js!</h1>
+        <h2>For all your simple, one-off data-binding needs</h3>
+      <div id="budget1" class="card">
 
-          <h2>My Budget</h2>
-          <input type="text" placeholder="rent" data-bind-to="budget.rent" />
-          <input type="text" placeholder="food" data-bind-to="budget.food" />
-          <input type="text" placeholder="car" data-bind-to="budget.car" />
-          <input type="text" placeholder="gym" data-bind-to="budget.gym" />
-          <input type="text" placeholder="transportation" data-bind-to="budget.transportation" />
-
+        <h2>My Budget</h2>
+        <input type="text" placeholder="rent" data-bind-to="budget.rent" />
+        <input type="text" placeholder="food" data-bind-to="budget.food" />
+        <input type="text" placeholder="car" data-bind-to="budget.car" />
+        <input type="text" placeholder="gym" data-bind-to="budget.gym" />
+        <input type="text" placeholder="transportation" data-bind-to="budget.transportation" />
 
         <div class="results">
           <h2>My Budget:</h2>
-          <p data-bind-from="budget.rent"></p>
-          <p data-bind-from="budget.food"></p>
-          <p data-bind-from="budget.car"></p>
-          <p data-bind-from="budget.gym"></p>
-          <p data-bind-from="budget.transportation"></p>
-          <p>total: <span data-bind-from="budget.total"><span></p>
+          <p>My rent is: <span data-bind-from="budget.rent"></span>, my food costs <span data-bind-from="budget.food"></span>, my car costs <span data-bind-from="budget.car"></span>, my membership to the gym costs me <span data-bind-from="budget.gym"></span>, and it costs me <span data-bind-from="budget.transportation"></span> for transportation.</p>
+          <p>so my total expenses are: <span data-bind-from="budget.total"><span></p>
         </div>
+        <pre class="code"></div>
       </div>
 
-      <div id="budget2">
-        <h1>Bindy.js!</h1>
-
-          <h2>My Budget</h2>
-          <input type="text" placeholder="rent" data-bind-to="budget.rent" />
-          <input type="text" placeholder="food" data-bind-to="budget.food" />
-          <input type="text" placeholder="car" data-bind-to="budget.car" />
-          <input type="text" placeholder="gym" data-bind-to="budget.gym" />
-          <input type="text" placeholder="transportation" data-bind-to="budget.transportation" />
-
-
-        <div class="results">
-          <h2>My Budget 2:</h2>
-          <p data-bind-from="budget.rent"></p>
-          <p data-bind-from="budget.food"></p>
-          <p data-bind-from="budget.car"></p>
-          <p data-bind-from="budget.gym"></p>
-          <p data-bind-from="budget.transportation"></p>
-          <p>total: <span data-bind-from="budget.total"><span></p>
-        </div>
-      </div>
 
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
       <script src="jquery.bindy.js"></script>
@@ -74,7 +77,6 @@
           }
         });
 
-         $('#budget2').bindy({});
       </script>
       </body>
   </html>
