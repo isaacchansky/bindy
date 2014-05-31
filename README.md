@@ -9,6 +9,17 @@ A super simple, declarative data-binding jquery plugin
   + Filter output (binding *from* js objects) through functions you register
 
 
+##Quick Start
+
+include in html
+```html
+  <script src="jquery.bindy.js"></script>
+  <script>
+    // this is all you need
+    $.bindy();
+  </script>
+```
+
 ##TO USE
 
 include in html
