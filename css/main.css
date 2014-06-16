@@ -1,0 +1,116 @@
+/*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #333;
+}
+
+html {
+    font-size: 1em;
+    line-height: 1.4;
+    background: snow;
+}
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+audio,
+canvas,
+img,
+video {
+    vertical-align: middle;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+
+body {
+    font: 16px/26px Helvetica, Helvetica Neue, Arial;
+}
+
+.wrapper {
+    width: 90%;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.main-header{
+    padding: 100px 20px;
+    min-height: 300px;
+    text-align: center;
+    background: dodgerblue;
+    color: snow;
+}
+
+.main-header h1{
+    font-size: 72px;
+}
+.main-header h2{
+    font-size: 24px;
+    font-weight: 300;
+}
+
+.button-section{
+    padding-top: 75px;
+}
+
+.big-button{
+    background: rgba(0,0,0,0.2);
+    border-radius: 4px;
+    padding: 15px;
+    font-size: 18px;
+    color: snow;
+    text-decoration: none;
+    -webkit-transition: background 0.5s;
+}
+.big-button:hover{
+    background: rgba(0,0,0,0.3);
+}
+
+
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+
+@media only screen and (min-width: 480px) {
+
+
+}
+
+@media only screen and (min-width: 768px) {
+
+
+}
+
+@media only screen and (min-width: 1140px) {
+
+
+}

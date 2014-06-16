@@ -1,1 +1,144 @@
-<h1>init</h1>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>bindy.js</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/highlight.css">
+        <link rel="stylesheet" href="css/main.css">
+
+    </head>
+    <body>
+
+    <header class="main-header">
+      <div class="wrapper">
+        <h1 class="title">Bindy.js</h1>
+        <h2>Simple, declarative, drop-in solution for basic data-binding.</h2>
+        <h2>For people who like jQuery and HTML.</h2>
+        <div class="button-section">
+          <a target="_blank" class="big-button" href="https://raw.githubusercontent.com/isaacchansky/bindy/master/jquery.bindy.js">Download</a>
+          <p>or</p>
+          <a target="_blank" class="big-button" href="https://www.github.com/isaacchansky/bindy">Fork on Github</a>
+        </div>
+      </div>
+    </header>
+    <div class="main wrapper clearfix">
+
+      <article>
+          <header>
+              <h1>What bindy does</h1>
+          </header>
+          <section>
+              <ul>
+                <li>Bind data from html inputs to JS objects</li>
+                <li>Bind data to text nodes from JS objects</li>
+                <li>Filter data before it binds to the DOM</li>
+                <li>Use hooks to transform data before it gets bound to JS</li>
+              </ul>
+          </section>
+          <section>
+              <h2>Quick Start</h2>
+              <p>Here's how bindy does data-binding</p>
+<pre><code data-lang="html">
+  &lt;input type="text" data-bind-to="person.name">
+  &lt;input type="text" data-bind-to="person.job">
+  &lt;input type="text" data-bind-to="person.age">
+  &lt;p data-bind-from="person.name">&lt;/p>
+  &lt;p data-bind-from="person.job">&lt;/p>
+  &lt;p data-bind-from="person.age">&lt;/p>
+</code></pre>
+
+              <p>To get this to work you just need to add the following initialization to your HTML.</p>
+<pre><code data-lang="html">
+  &lt;script src="jquery.js">&lt;/script>
+  &lt;script src="jquery.bindy.js">&lt;/script>
+  &lt;script>
+    // initialize bindy!
+    $.bindy();
+  &lt;/script>
+</code></pre>
+          </section>
+          <section>
+            <h2>Other Fun Stuff</h2>
+            <h3>Live JS object</h3>
+            <p>The Bindy function returns the data object that stays up-to-date, so you can keep it in a variable and use the updated values when you need to.</p>
+<pre><code data-lang="html">
+  &lt;input type="text" data-bind-to="person.name">
+  &lt;input type="text" data-bind-to="person.job">
+  &lt;input type="text" data-bind-to="person.age">
+</code></pre>
+<pre><code data-lang="js">
+    var userInputs = $.bindy();
+    console.log(userInputs);
+     /* {
+        person: {
+          name: "...",
+          job: "...",
+          age: "...",
+        }
+     */ }
+</code></pre>
+            <h3>Scopes</h3>
+            <p>The above "quick start" example scopes the data binding at the Document level. If you want data-binding in, say, your sidebar section and footer section, you can scope multiple instances of bindy to DOM nodes.</p>
+<pre><code data-lang="js">
+  // data-binding only happens within the sidebar
+  $('#my-sidebar').bindy();
+
+
+  // data-binding only happens within the footer
+  $('#my-footer').bindy();
+</code></pre>
+
+            <h3>Filters</h3>
+            <p>Filters are quick helpers for formatting data before it gets rendered. You can register filters with bindy in the configuration object that gets passed on initialization.</p>
+<pre><code data-lang="html">
+  &lt;input type="text" data-bind-to="job.salary">
+  &lt;p data-bind-from="job.salary | toCurrency">&lt;/p>
+  </code></pre>
+<pre><code data-lang="js">
+  $.bindy({
+    filters: {
+      toCurrency: function(string) {
+        return '$ '+(parseInt(string, 10) || 0).toFixed(2);
+      }
+    }
+  });
+</code></pre>
+          </section>
+          <section>
+            <h2>BeforeUpdate Hook</h2>
+            <p>Configure Bindy with a beforeUpdate function to dive in and manipulate the data object before it gets saved as a JS object.</p>
+<pre><code data-lang="html">
+  &lt;input type="text" data-bind-to="person.firstName">
+  &lt;input type="text" data-bind-to="person.lastName">
+  &lt;p data-bind-from="person.fullName">&lt;/p>
+</code></pre>
+<pre><code data-lang="js">
+  $.bindy({
+    beforeUpdate: function(model) {
+      model.fullName = model.firstName+' '+model.lastName;
+      return model;
+    }
+  });
+</code></pre>
+          </section>
+          <footer>
+
+          </footer>
+      </article>
+    </div> <!-- #main -->
+
+    <footer class="wrapper">
+      <p>:)</p>
+    </footer>
+
+    <script src="js/highlight.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>
