@@ -102,7 +102,7 @@
       //   ...
       //  return model;
       // }
-      if( typeof(options.beforeUpdate) === 'function' ){
+      if( typeof(options.afterUpdate) === 'function' ){
         var transformation = options.afterUpdate.call(null, model);
         if( transformation !== undefined){
           rootModel = transformation;
