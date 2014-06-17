@@ -67,17 +67,17 @@
             var b = rootModel.budget;
             // total up your rent
             rootModel.budget.total = 0;
-            rootModel.budget.total += parseInt(b.rent, 10) || 0;
-            rootModel.budget.total += parseInt(b.food, 10) || 0;
-            rootModel.budget.total += parseInt(b.car, 10) || 0;
-            rootModel.budget.total += parseInt(b.gym, 10) || 0;
-            rootModel.budget.total += parseInt(b.transportation, 10) || 0;
+            rootModel.budget.total += parseFloat(b.rent, 10) || 0;
+            rootModel.budget.total += parseFloat(b.food, 10) || 0;
+            rootModel.budget.total += parseFloat(b.car, 10) || 0;
+            rootModel.budget.total += parseFloat(b.gym, 10) || 0;
+            rootModel.budget.total += parseFloat(b.transportation, 10) || 0;
             // must return the root object passed in to apply a transformation on your model
             return rootModel;
           },
           filters: {
             toCurrency: function(string) {
-              return '$'+(parseInt(string, 10) || 0).toFixed(2);
+              return '$'+(parseFloat(string, 10) || 0).toFixed(2);
             }
           }
         });
