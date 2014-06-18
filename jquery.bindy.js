@@ -75,9 +75,19 @@
         var attr = binder[1].trim();
         var value = rootModel[object][attr];
         if(filter){
-          value = options.filters[filter.trim()].call(null, value);
+          var filter_func = options.filters[filter.trim()];
+          if(filter_func){
+            value = filter_func.call(null, value);
+            $(el).html(value);
+          }else{
+            try{
+              throw "could not find filter: "+ filter.trim() +".";
+            }
+            catch(e){
+              console.warn(e);
+            }
+          }
         }
-        $(el).html(value);
       });
     }
 
