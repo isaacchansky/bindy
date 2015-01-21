@@ -20,7 +20,7 @@ include in html
   </script>
 ```
 
-##TO USE
+##HOW TO USE
 
 include in html
 ```html
